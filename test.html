@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silico - Online Shopping</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        header, footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            margin: 0;
+        }
+        main {
+            padding: 20px;
+        }
+        .product-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .product-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            text-align: center;
+            background-color: #f9f9f9;
+        }
+        .product-card img {
+            width: 100%;
+            height: auto;
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+        .product-card button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .product-card button:hover {
+            background-color: #0056b3;
+        }
+        #cart {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .cart-btn {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Silico</h1>
+        <p>Your one-stop shop for phone cases!</p>
+        <p id="cart">Cart: <span id="cart-count">0</span> items</p>
+    </header>
+
+    <main>
+        <h2>Products</h2>
+        <div class="product-container" id="product-list"></div>
+    </main>
+
+    <footer>
+        <p>Contact Us: +91-XXXXXXXXXX</p>
+        <p>Date: <span id="date"></span></p>
+    </footer>
+
+    <script>
+        const products = [
+            { id: 1, name: 'Phone Case 1', brand: 'Silico', description: 'High-quality soft silicone phone case.', price: 99, image: 'Case 1.jpg' },
+            { id: 2, name: 'Phone Case 2', brand: 'Silico', description: 'Trendy and protective shock-absorbent case.', price: 149, image: 'case 2.jpg' },
+            { id: 3, name: 'Phone Case 3', brand: 'Silico', description: 'Elegant design with a slim fit.', price: 199, image: 'case 4.avif' }
+        ];
+
+        let cartCount = 0;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const productList = document.getElementById('product-list');
+            const cartCountElement = document.getElementById('cart-count');
+            const dateElement = document.getElementById('date');
+            
+            products.forEach(product => {
+                const productDiv = document.createElement('div');
+                productDiv.classList.add('product-card');
+                productDiv.innerHTML = ` 
+                    <img src="${product.image}" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p>Brand: ${product.brand}</p>
+                    <p>${product.description}</p>
+                    <p>Price: ₹${product.price}</p>
+                    <button onclick="addToCart()">Add to Cart</button>
+                `;
+                productList.appendChild(productDiv);
+            });
+
+            window.addToCart = function() {
+                cartCount++;
+                cartCountElement.textContent = cartCount;
+                alert('Product added to cart!');
+            }
+
+            dateElement.textContent = new Date().toLocaleDateString('en-IN', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        });
+    </script>
+    <!-- Cart Button -->
+    <button><a href="file:///C:/Users/bodavula/Desktop/HTML/Dynamic%20Shopping%20web/cart.html" class="cart-btn">Go to Cart</a></button>
+</body>
+</html>
